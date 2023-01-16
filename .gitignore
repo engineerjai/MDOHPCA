@@ -1,0 +1,10 @@
+*.pyc
+*~
+.DS_Store
+.dropbox
+.idea
+.egg-info/*
+your_project/docs/_build/
+your_project/docs/_srcdocs/
+*testflo_report.out
+*.out
