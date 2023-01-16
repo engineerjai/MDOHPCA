@@ -1,0 +1,30 @@
+/*
+ * sytle.css
+ * ~~~~~~~~~~~~~
+ *
+ * you-project's stylesheet
+ *
+ */
+
+@import url("sphinxdoc.css");
+
+/* Put in some css for your docs here. This will override anything else in the project*/
+a {
+    color: navy;
+    text-decoration: none;
+}
+div.body h1 a, div.body h2 a, div.body h3 a, div.body h4 a, div.body h5 a, div.body h6 a {
+  color: navy!important;
+}
+
+a:visited {
+    color: navy;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #6699FF;
+}
+
+/* any other type of css that would make your docs look the way you like */
