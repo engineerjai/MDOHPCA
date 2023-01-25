@@ -1,17 +1,10 @@
-# library_template
-A structure that can be a starting point for developers who want to create projects that depend on OpenMDAO.
+# MDOHPCA directory
+Main '.ipynb' file in this location (MDOHPCA) will call on other files in folders to construct the openMDAO problem.
 
-This is the simplest working repository. 
+Spreadsheet used to keep track of variables and names.
 
-This sample repo is fully installable using:
-`pip install -e .`
+MDOHPCA_env.yaml is the environment file containing necessary packages. If more packages are needed, environment file must be updated to all be on same page.
 
-You can build the docs by changing into `your_project/docs` and typing:
-`make clean; make all`
+Each of us use our own folder to keep track of our own work, all variables should still be passed between disciplines using MDOHPCA.ipynb
 
-There is one test in the `package` dir that will run with `testflo`.
-
-Use this working example to build your own repository!
-
-Find a more detailed explanation of how to get this all working at:
-http://openmdao.org/twodocs/other/repo_guide/index.html
+Create your own files in your folders to create functions (i.e. analyses) or just use the setup file.
