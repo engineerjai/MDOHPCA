@@ -27,5 +27,6 @@ data_modified=deflection_constraint
 
 #determining the chord length and span with the lowest weight for optimisation purposes
 min_weight=data_modified[data_modified["Weight"]==data_modified["Weight"].min()]
-span=min_weight.iloc[0,0]
-chord_length=min_weight.iloc[0,1]
+half_span=min_weight.iloc[0,0]
+root_chord=min_weight.iloc[0,1]
+tip_chord=min_weight.iloc[0,2]
