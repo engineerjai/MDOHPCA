@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 import prelim_wing_design
 import openmdao.api as om
+import derivatives_calculator
 import wing_section_properties
 import matplotlib.pyplot as plt
 from openaerostruct.utils import plot_wing
@@ -27,7 +28,7 @@ max_allowable_wing_span = 80 # [m]
 mass = 155600 # [kg]
 
 # House Keeping
-to_plot_wing = True # If False avoids openning oas plotting window for wing
+to_plot_wing = False # If False avoids openning oas plotting window for wing
 to_plot_aerofoils = False # If False does not plot tip and root aerofoils
 
 # Calculates basic wing characteristics based on the preliminary wing design approach
@@ -270,9 +271,13 @@ wing_coords = wing_coords.apply(lambda coord: round(coord / 1e-6) * 1e-6)
 wing_coords.to_csv('wing_coordinates.dat', index=False)
 
 
-# Calculates stability derivatives.
-import derivatives_calculator
+# Calculates stability coefficients.
 CL_alpha, CD_alpha, CM_alpha = derivatives_calculator.CL_CD_CM_alpha(aerodynamic_outputs)
+CL_psi, CD_psi, CM_psi = derivatives_calculator.CL_CD_CM_yaw(aerodynamic_outputs)
+CL_phi, CD_phi, CM_phi = derivatives_calculator.CL_CD_CM_roll(aerodynamic_outputs)
+
+# Also calculates the stability coefficients but saves them into a single object called <stability_coefficients>
+stability_coefficients = derivatives_calculator.coefficients(aerodynamic_outputs)
 
 
 print("END: Aero IDO finished running !")
