@@ -27,6 +27,10 @@ naca_series = '23012'
 max_allowable_wing_span = 80 # [m]
 mass = 155600 # [kg]
 
+constants_file_path = "D:/University/Year 4/MECH5080M Team Project/1 - Aerodynamics Works/Aero_IDO/constants.xlsx"
+mass = pd.read_excel(constants_file_path)
+mass = mass[mass["variable name"]=="M_initial"]["value"][12]
+
 # House Keeping
 to_plot_wing = False # If False avoids openning oas plotting window for wing
 to_plot_aerofoils = False # If False does not plot tip and root aerofoils
@@ -80,6 +84,7 @@ surface = {
 "data_y_lower": lower_y,
 "twist_cp": np.zeros([2]),               # Initializes the twist angles of the wing
 "mesh": mesh,
+"CM0": 0.0,
 "CL0": 0.0,                              # CL of the surface at alpha = 0
 "CD0": 0.00632,                          # CD of the surface at alpha = 0  
 "k_lam": 0.05,                           # Percentage of chord with laminar flow used for viscous analysis
@@ -104,6 +109,7 @@ indep_var_comp.add_output("Mach_number", val=cruise_speed/a_cruise)             
 indep_var_comp.add_output("re", val=Re_cruise, units="1/m")                     # Reynolds number at cruise conditions
 indep_var_comp.add_output("rho", val=cruise_air_density, units="kg/m**3")       # Air density at cruise altitude
 indep_var_comp.add_output("cg", val=np.zeros(3), units="m")                     # Initialization of the centre of gravity vector
+indep_var_comp.add_output("CM", val=0, )
 
 # Adds the IndepVarComp to the problem model
 prob.model.add_subsystem("prob_vars", indep_var_comp, promotes=["*"])
@@ -122,6 +128,7 @@ prob.model.connect(surface["name"] + ".mesh", point_name + "." + surface["name"]
 
 # Performs the connections with the modified names within the 'aero_states' group
 prob.model.connect(surface["name"] + ".mesh", point_name + ".aero_states." + surface["name"] + "_def_mesh")
+
 
 # Imports the Scipy Optimizer and set the driver of the problem to use it, which defaults to an SLSQP optimisation method
 prob.driver = om.ScipyOptimizeDriver()
@@ -152,8 +159,9 @@ prob.setup()
 
 prob.run_driver()
 
-print(prob[point_name + ".wing_perf.CD"][0])
-print(prob[point_name + ".wing_perf.CL"][0])
+print("CD = " + str(prob[point_name + ".wing_perf.CD"][0]))
+print("CL = " + str(prob[point_name + ".wing_perf.CL"][0]))
+print("CM = " + str(prob[point_name + ".total_perf.CM"][1]))
 
 aerodynamic_outputs = {
     "alpha": prob["alpha"][0],
@@ -278,6 +286,10 @@ CL_phi, CD_phi, CM_phi = derivatives_calculator.CL_CD_CM_roll(aerodynamic_output
 
 # Also calculates the stability coefficients but saves them into a single object called <stability_coefficients>
 stability_coefficients = derivatives_calculator.coefficients(aerodynamic_outputs)
+pd.DataFrame({"Key":["CL","CD","CM"],
+              "wrt pitch":[CL_alpha, CD_alpha, CM_alpha],
+              "wrt yaw":[CL_psi, CD_psi, CM_psi],
+              "wrt roll":[CL_phi, CD_phi, CM_phi]}).to_csv("derivatives.dat", index=False)
 
 
 print("END: Aero IDO finished running !")
