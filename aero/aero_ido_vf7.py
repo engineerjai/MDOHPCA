@@ -28,9 +28,9 @@ naca_series = '23012'
 max_allowable_wing_span = 80 # [m]
 mass = 155600 # [kg]
 
-constants_file_path = "D:/University/Year 4/MECH5080M Team Project/1 - Aerodynamics Works/Aero_IDO/constants.xlsx"
-mass = pd.read_excel(constants_file_path)
-mass = mass[mass["variable name"]=="M_initial"]["value"][12]
+# constants_file_path = "D:/University/Year 4/MECH5080M Team Project/1 - Aerodynamics Works/Aero_IDO/constants.xlsx"
+# mass = pd.read_excel(constants_file_path)
+# mass = mass[mass["variable name"]=="M_initial"]["value"][12]
 
 # House Keeping
 to_plot_wing = False # If False avoids openning oas plotting window for wing
