@@ -17,7 +17,7 @@ import naca_five_digit_aerofoil_coordinates_calculator as naca_calc
 from cruise_conditions_calculator import cruise_conditions_calculator
 
 # EXTERNAL INPUTS
-keyaeronumbers = pd.read_csv("keyAero.dat", index=False)
+keyaeronumbers = pd.read_csv("keyAero.dat")
 naca_series = keyaeronumbers["naca_series"]
 max_allowable_wing_span = keyaeronumbers["max_allowable_wing_span"]
 mass = keyaeronumbers["mass"]
