@@ -18,9 +18,9 @@ from cruise_conditions_calculator import cruise_conditions_calculator
 
 # EXTERNAL INPUTS
 keyaeronumbers = pd.read_csv("keyAero.dat")
-naca_series = keyaeronumbers["naca_series"]
-max_allowable_wing_span = keyaeronumbers["max_allowable_wing_span"]
-mass = keyaeronumbers["mass"]
+naca_series = str(int(keyaeronumbers.iloc[1]))
+max_allowable_wing_span = keyaeronumbers.iloc[2]
+mass = keyaeronumbers.iloc[0]
 
 # Acquires flight conditions at cruise
 cruise_speed, Re_cruise, cruise_air_density, a_cruise, T_cruise, eta_cruise = cruise_conditions_calculator()
