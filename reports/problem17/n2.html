@@ -321,8 +321,7 @@ function handleError(evt) {
     min-width: 200px;
     border-collapse: separate;
     border-spacing: 0;
-    /* width: fit-content; */
-    width: 100%;
+    width: fit-content;
     height: fit-content;
 }
 
@@ -1138,11 +1137,6 @@ p.help-text > span {
 
 
 /* ^^^^^^^^^^ End Child Select Window theme ^^^^^^^^^^ */
-
-.scrollable {
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
 
 </style>
 <style type="text/css">
@@ -2955,7 +2949,7 @@ return _;
 
 </head>
 <body>
-<div id="all-diagram-content" class="non-embedded-diagram" data-openmdao-version='3.26.0'>
+<div id="all-diagram-content" class="non-embedded-diagram" data-openmdao-version='3.23.0'>
     <div id="diagram-content">
         <!-- Toolbar -->
         <div id="toolbarLoc">
@@ -3255,7 +3249,7 @@ return _;
 </div>
 
 <script type="text/javascript">
-    var compressedModel = "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";
+    var compressedModel = "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";
 </script>
 
 <script type="text/javascript">
@@ -3900,10 +3894,6 @@ class TreeNode {
 
         this.parent = parent;
 
-        // All nodes connected to this one as either a source or target
-        this.connSources = new Set();
-        this.connTargets = new Set();
-
         this.sourceParentSet = new Set();
         this.targetParentSet = new Set();
 
@@ -3997,16 +3987,11 @@ class TreeNode {
         return !(this.draw.hidden || this.draw.filtered);
     }
 
-    /** Return true if there are no children */
-    isLeaf() {
-        return (!this.hasChildren());
-    }
-
     /** True if node is not hidden and has no visible children */
     isVisibleLeaf() {
         if (this.draw.hidden || this.draw.filtered) return false; // Any explicitly hidden node
         if (this.isInputOrOutput()) return !this.draw.filtered; // Variable
-        if (this.isLeaf()) return true; // Group w/out children
+        if (!this.hasChildren()) return true; // Group w/out children
         return this.draw.minimized; // Collapsed non-variable
     }
 
@@ -4017,12 +4002,9 @@ class TreeNode {
 
     /**
      * Look for the supplied node in the set of child names.
-     * @param {TreeNode} compareNode The node to look for.
-     * @param {Boolean} includeSelf If true, return true if compareNode is us.
      * @returns {Boolean} True if a match is found, otherwise false.
      */
-    hasNodeInChildren(compareNode, includeSelf = false) {
-        if (includeSelf && compareNode === this) return true;
+    hasNodeInChildren(compareNode) {
         return this.childNames.has(compareNode.path);
     }
 
@@ -4031,8 +4013,7 @@ class TreeNode {
      * @param {TreeNode} [parentLimit = null] Stop searching at this common parent.
      * @returns {Boolean} True if the node is found, otherwise false.
      */
-    hasParent(compareNode, parentLimit = null, includeSelf = false) {
-        if (includeSelf && compareNode === this) return true;
+    hasParent(compareNode, parentLimit = null) {
         for (let obj = this.parent; obj != null && obj !== parentLimit; obj = obj.parent) {
             if (obj === compareNode) {
                 return true;
@@ -4103,14 +4084,13 @@ class TreeNode {
      * @returns {String} The HTML-safe id.
      */
     static pathToId(path) {
-        return path.replace(/[\.<> :|]/g, function (c) {
+        return path.replace(/[\.<> :]/g, function (c) {
             return {
                 ' ': '__',
                 '<': '_LT',
                 '>': '_GT',
                 '.': '_',
-                ':': '-',
-                '|': '--'
+                ':': '-'
             }[c];
         })
     }
@@ -4387,7 +4367,6 @@ class NodeConnection {
         this.conn = conn;
 
         this.srcObj = nodes[conn.src];
-        this.srcObj.connTargets.add(conn.tgt);
         const srcObjParents = [];
         if (!this.srcObj) {
             console.warn(`Cannot find connection source ${conn.src}.`);
@@ -4401,7 +4380,6 @@ class NodeConnection {
         }
 
         this.tgtObj = nodes[conn.tgt];
-        this.tgtObj.connSources.add(conn.src);
         const tgtObjParents = [];
         if (!this.tgtObj) {
             console.warn(`Cannot find connection target ${conn.tgt}.`);
@@ -6449,13 +6427,11 @@ class Window {
      * MutationObserver.
      * @returns {Window} Reference to this.
      */
-    sizeToContent(extraWidth = 0, extraHeight = 2, considerTitle = false) {
-        const bodyWidth = this.body.node().scrollWidth;
-        const titleWidth = this._title.node().scrollWidth + 60;
-        const contentWidth = ((!considerTitle || bodyWidth > titleWidth)? bodyWidth : titleWidth) + extraWidth;
-        const contentHeight = this.body.node().scrollHeight;
-        const headerHeight = this.header.node().offsetHeight
-        const footerHeight = this.hasFooter() ? this.footer.node().offsetHeight : 0;
+    sizeToContent(extraWidth = 0, extraHeight = 2) {
+        let contentWidth = this.body.node().scrollWidth + extraWidth,
+            contentHeight = this.body.node().scrollHeight,
+            headerHeight = this.header.node().offsetHeight,
+            footerHeight = this.hasFooter() ? this.footer.node().offsetHeight : 0;
 
         const totalHeight = contentHeight + headerHeight + footerHeight + extraHeight;
 
@@ -7824,45 +7800,6 @@ class InfoPropArray extends InfoPropDefault {
     canShow(node) { return node.propExists(this.key); }
 }
 
-/** Display connections associated with a node */
-class InfoPropConns extends InfoPropDefault {
-    constructor(key, desc) {
-        super(key, desc, false);
-    }
-
-    addRow(tbody, node) {
-        tbody.append('tr').append('th').attr('colspan', '3')
-            .attr('class', 'options-header')
-            .text(this.desc);
-
-            /*
-        // TODO: Add children
-        for (const conn of node.connTargets) {
-            const newRow = tbody.append('tr');
-
-            newRow.append('td')
-                .attr('scope', 'row')
-                .text(node.path);
-
-            newRow.append('td').text(' --> ');
-    
-            newRow.append('td').text(conn);
-        }
-
-        for (const conn of node.connSources) {
-            const newRow = tbody.append('tr');
-    
-            newRow.append('td').text(conn);
-
-            newRow.append('td').text(' --> ');
-
-            newRow.append('td')
-                .attr('scope', 'row')
-                .text(node.path);
-        } */
-    }
-}
-
 InfoPropDefault.floatFormatter = d3.format('g');
 
 
@@ -8171,8 +8108,8 @@ class NodeInfo extends Window {
  * Make a persistent copy of the NodeInfo panel and handle its drag/close events
  * @typedef PersistentNodeInfo
  */
-class PersistentNodeInfo extends WindowResizable {
-    constructor(nodeInfo, startHeight = 0) {
+class PersistentNodeInfo extends WindowDraggable {
+    constructor(nodeInfo) {
         super('persistentNodeInfo-' + uuidv4(), '#' + nodeInfo.window.attr('id'));
 
         // Avoid just copying the reference because nodeInfo.values will be wiped:
@@ -8189,21 +8126,6 @@ class PersistentNodeInfo extends WindowResizable {
             .on("mouseover", this.mouseOver.bind(this))
             .on("mouseleave", this.mouseLeave.bind(this))
             .on("mousemove", this.mouseMove.bind(this));
-
-        if (startHeight > 0) {
-            const pos = this._getPos();
-            if (pos.height > startHeight) {
-                pos.height = startHeight;
-                this._setPos(pos)
-                this.body.classed('scrollable', true);
-                const tableHeight = parseInt(this.body.select('table.node-info-table').style('height'));
-                const extraHeight = pos.height - parseInt(this.body.style('height'));
-                this.maxHeight = tableHeight + extraHeight;
-            }
-            else {
-                this.maxHeight = pos.height;
-            }
-        }
     }
 
     /** When the mouse enters the element, show the tool tip */
@@ -8280,108 +8202,6 @@ class PersistentNodeInfo extends WindowResizable {
                 .on("mousemove", null);
             super.close(e);
         }
-    }
-}
-
-/**
- * Display all connections represented by the current off-diagonal cell.
- * @typedef NodeConnectionInfo
- */
-class NodeConnectionInfo extends NodeInfo {
-    /**
-     * Build a list of the properties we care about and set up
-     * references to the HTML elements.
-     */
-    constructor(ui) {
-        super(ui, false);
-        this.propList = [];
-    }
-
-    /**
-     * Find the best label for a connected node.
-     * @param {TreeNode} node The node to determine a name for.
-     * @returns The promoted name if it has one, otherwise the absolute path.
-     */
-    nodeName(node) {
-        let name = node.path;
-        if (node.path != node.promotedName) name += `<br><i>(${node.promotedName}</i>)`;
-        return name;
-    }
-
-    /**
-     * Gather all connections between the two cells that this one represents.
-     * @param {Array} connList The connections discovered so far.
-     * @param {TreeNode} srcNode The source node to search.
-     * @param {TreeNode} tgtNode The target node to search.
-     */
-    _getConnections(connList, srcNode, tgtNode) {
-        if (srcNode.hasChildren()) {
-            for (const child of srcNode.children) {
-                this._getConnections(connList, child, tgtNode)
-            }
-        }
-        else {
-            if (srcNode.parent === tgtNode.parent) {
-                const newConn = { 'src': this.nodeName(srcNode), 'tgt': this.nodeName(tgtNode) };
-                connList.push(newConn);
-            }
-            for (const tgt of srcNode.targetParentSet) {
-                if (tgt.isLeaf() && tgt.hasParent(tgtNode, null, true)) {
-                    const newConn = { 'src': this.nodeName(srcNode), 'tgt': this.nodeName(tgt) };
-                    connList.push(newConn);
-                }
-            }
-        }
-    }
-
-    /**
-     * Create a new persistent window by copying our contents. Set the
-     * max initial height of the window at 300px.
-     */
-    pin() {
-        if (this.tbody.html() == '') return; // Was already pinned so is empty
-
-        new PersistentNodeInfo(this, 300);
-        this.hidden = true;
-        this.clear();
-        return this;
-    }
-
-    /**
-     * Load the NodeInfo window with connection information for an off-diagonal cell.
-     * @param {Object} event Reference to the event that triggered the function.
-     * @param {MatrixCell} cell Reference to the cell that was hovered.
-     * @param {String} color The color of the title bar.
-     */
-    update(event, cell, color) {
-        if (!this.active) return;
-        this.clear();
-
-        this.name = cell.id;
-        this.ribbonColor(color);
-
-        const connList = [];
-        this._getConnections(connList, cell.srcObj, cell.tgtObj);
-        for (const conn of connList) {
-            const newRow = this.tbody.append('tr');
-
-            newRow.append('td')
-                .attr('scope', 'row')
-                .html(conn.src);
-
-            newRow.append('td').html(' &#x2501;&#x2501;&#x2501;&#x25ba; ');
-            newRow.append('td').html(conn.tgt);
-        }
-
-        let title = 'Connections';
-        if ( ! (cell.srcObj.isLeaf() || cell.tgtObj.isLeaf()) ) {
-            title += ` from ${cell.srcObj.path} to ${cell.tgtObj.path}`;
-        }
-
-        this.title(title)
-            .sizeToContent(0, 2, true)
-            .moveNearMouse(event)
-            .show();
     }
 }
 
@@ -8598,45 +8418,20 @@ class UserInterface {
     }
 
     /**
-     * Create a new node connection info window.
-     * @param {Selection} svgNodeGroup Placeholder for subclasses.
-     */
-    _newConnInfoBox(svgNodeGroup) { 
-        this.nodeInfoBox = new NodeConnectionInfo(this);
-    }
-
-    /**
      * If node info mode is active, create a new node info window, populate, and display it.
      * @param {Event} event The Event object created by the trigger.
      * @param {TreeNode} node The node associated with the HTML object.
      * @param {String} [color = null] The color of the titlebard. Autoselected if null.
-     * @param {Boolean} [isConnection = false] If true, make a connection info window.
      */
-    showInfoBox(event, node, color = null, isConnection = false) {
+    showInfoBox(event, node, color = null) {
         if (this.click.isNodeInfo) {
             const svgNodeGroup = d3.select(event.currentTarget);
             if (!color) color = svgNodeGroup.select('rect').style('fill');
 
-            if (isConnection) {
-                this._newConnInfoBox(svgNodeGroup)
-            }
-            else this._newInfoBox(svgNodeGroup);
-
+            this._newInfoBox(svgNodeGroup);
             this.nodeInfoBox.activate();
             this.click.update(this.nodeInfoBox);
             this.nodeInfoBox.update(event, node, color);
-        }
-    }
-
-    showCellInfoBox(event, cell, color = null) {
-        if (this.click.isNodeInfo) {
-            const svgNodeGroup = d3.select(event.currentTarget);
-            if (!color) color = svgNodeGroup.select('rect').style('fill');
-
-            this._newConnInfoBox(svgNodeGroup);
-            this.nodeInfoBox.activate();
-            this.click.update(this.nodeInfoBox);
-            this.nodeInfoBox.update(event, cell, color);
         }
     }
 
@@ -11295,15 +11090,16 @@ class MatrixCell {
      * Select the mouseover callback depending on whether we're on the diagonal.
      * TODO: Remove these globals
      */
-    getMouseoverFunc() {
-        return (this.onDiagonal() ? n2MouseFuncs.overOnDiag : n2MouseFuncs.overOffDiag);
+    mouseover() {
+        return (this.onDiagonal() ? n2MouseFuncs.overOnDiag :
+            n2MouseFuncs.overOffDiag);
     }
 
     /**
     * Select the mousemove callback depending on whether we're on the diagonal.
     * TODO: Remove these globals
     */
-    getMousemoveFunc() {
+    mousemove() {
         return (this.onDiagonal() ? n2MouseFuncs.moveOnDiag : null);
     }
 
@@ -11804,11 +11600,11 @@ class Matrix {
 
                 return `translate(${transX},${transY})`;
             })
-            .each(function(d) {
+            .each(function (d) {
                 // "this" refers to the element here, so leave it alone:
                 d.renderer.renderCurrent(this)
-                    .on('mouseover', d.getMouseoverFunc())
-                    .on('mousemove', d.getMousemoveFunc())
+                    .on('mouseover', d.mouseover())
+                    .on('mousemove', d.mousemove())
                     .on('mouseleave', n2MouseFuncs.out)
                     .on('click', (e,d) => n2MouseFuncs.click(d))
             });
@@ -12031,7 +11827,7 @@ class Matrix {
                             'tgtId': cell.tgtObj.id
                         },
                         'matrixSize': this.diagNodes.length,
-                        'label': offscreenNode.path,
+                        'label': offscreenNode.absPathName,
                         'offscreenId': offscreenNode.id
                     });
                 }
@@ -12850,7 +12646,7 @@ class Diagram {
     mouseOverOnDiagonal(e, cell) {
         if (this.matrix.cellExists(cell)) {
             this.matrix.mouseOverOnDiagonal(cell);
-            this.ui.showInfoBox(e, cell.obj, cell.color(), false);
+            this.ui.showInfoBox(e, cell.obj, cell.color());
         }
     }
 
@@ -12871,7 +12667,6 @@ class Diagram {
     mouseOverOffDiagonal(e, cell) {
         if (this.matrix.cellExists(cell)) {
             this.matrix.mouseOverOffDiagonal(cell);
-            this.ui.showCellInfoBox(e, cell, cell.color(), true);
         }
     }
 
@@ -14229,8 +14024,6 @@ class OmMatrix extends Matrix {
     constructor(model, layout, diagGroups, arrowMgr, lastClickWasLeft, findRootOfChangeFunction,
         prevNodeSize = { 'width': 0, 'height': 0 }) {
         super(model, layout, diagGroups, arrowMgr, lastClickWasLeft, findRootOfChangeFunction, prevNodeSize);
-
-        this._nodeIdxCache = {};
     }
 
     /**
@@ -14336,86 +14129,57 @@ class OmMatrix extends Matrix {
     }
 
     /**
-     * Determine whether a connection has already been drawn. If not,
-     * record that it has now.
-     * @param {Number} startIndex The index of the first diagonal node.
-     * @param {Number} endIndex The index of the last diagonal node.
-     * @returns {Boolean} True if the connection is already drawn, otherwise false.
-     */
-    _checkDrawnList(startIndex, endIndex) {
-        if (this._drawnList[startIndex] && this._drawnList[startIndex][endIndex]) return true;
-        if (this._drawnList[endIndex] && this._drawnList[endIndex][startIndex]) return true;
-
-        if (!this._drawnList[startIndex]) this._drawnList[startIndex] = {};
-        this._drawnList[startIndex][endIndex] = true;
-        return false;
-    }
-
-    /**
-     * Determine which cycle arrows to draw in the lower-left corner of the matrix.
+     * Draw the cycle arrows in the lower-left corner of the matrix.
+     * @param {OmMatrixCell} cell The focused cell.
      * @param {Number} startIndex The index of the first diagonal node.
      * @param {Number} endIndex The index of the last diagonal node.
      */
-    _addArrowsInputView(startIndex, endIndex) {
-        if (this._checkDrawnList(startIndex, endIndex)) return;
-
+    _drawArrowsInputView(cell, startIndex, endIndex) {
         const boxInfo = this._boxInfo()
         const boxStart = boxInfo[startIndex],
             boxEnd = boxInfo[endIndex];
 
         // Draw multiple horizontal lines, but no more than one vertical line
         // for box-to-box connections
+        const arrows = [];
         for (let startsI = boxStart.startI; startsI <= boxStart.stopI; ++startsI) {
             for (let endsI = boxEnd.startI; endsI <= boxEnd.stopI; ++endsI) {
-                if (startsI != endsI && this.exists(startsI, endsI)) {
-                    if (!this._arrows[startsI]) this._arrows[startsI] = {};
-                    this._arrows[startsI][endsI] = true;
+                if (this.exists(startsI, endsI)) {
+                    arrows.push({
+                        'start': startsI,
+                        'end': endsI
+                    });
                 }
             }
         }
-    }
 
-    /**
-     * Draw the accumulated set of arrows in the matrix.
-     * @param {OmMatrixCell} cell Reference to the cell where the mouseover was triggered.
-     */
-    _drawArrowsInputView(cell) {
-        for (const start in this._arrows) {
-            for (const end in this._arrows[start]) {
-                this.arrowMgr.addFullArrow(cell.id, {
-                    'start': {
-                        'col': start,
-                        'row': start,
-                        'id': this.grid[start][start].srcObj.id
-                    },
-                    'end': {
-                        'col': end,
-                        'row': end,
-                        'id': this.grid[end][end].tgtObj.id
-                    },
-                    'color': (start < end) ?
-                        OmStyle.color.outputArrow : OmStyle.color.inputArrow,
-                });
-            }
+        for (const arrow of arrows) {
+            this.arrowMgr.addFullArrow(cell.id, {
+                'start': {
+                    'col': arrow.start,
+                    'row': arrow.start,
+                    'id': this.grid[arrow.start][arrow.start].srcObj.id
+                },
+                'end': {
+                    'col': arrow.end,
+                    'row': arrow.end,
+                    'id': this.grid[arrow.end][arrow.end].tgtObj.id
+                },
+                'color': (startIndex < endIndex) ?
+                    OmStyle.color.outputArrow : OmStyle.color.inputArrow,
+            });
         }
     }
 
     /**
      * Find the index of the first node in this.diagNodes that "has" the supplied node.
-     * For some reason Array.findIndex() did not work correctly for this. Found nodes
-     * are cached with their index so the search doesn't have to be performed more
-     * than once per node.
+     * For some reason Array.findIndex() did not work correctly for this.
      * @param {OmTreeNode} node Reference to the node to search for.
      * @returns {Number} The index of the node if found, otherwise -1.
      */
     _findDiagNodeIndex(node) {
-        if (this._nodeIdxCache[node.path]) {
-            return this._nodeIdxCache[node.path];
-        }
-
         for (const idx in this.diagNodes) {
             if (this.diagNodes[idx].hasNode(node)) {
-                this._nodeIdxCache[node.path] = idx;
                 return idx;
             }
         }
@@ -14434,11 +14198,6 @@ class OmMatrix extends Matrix {
         if (cell.row > cell.col) {
             const src = this.diagNodes[cell.row],
                 tgt = this.diagNodes[cell.col];
-
-            // Accumulate what's been discovered/drawn in these to prevent duplicates
-            this._drawnList = {};
-            this._arrows = {};
-
             // Get an array of all the parents and children of the target with cycle arrows
             const relativesWithCycleArrows = tgt.getNodesWithCycleArrows();
 
@@ -14455,14 +14214,12 @@ class OmMatrix extends Matrix {
                                 throw ("OmMatrix.drawOffDiagonalArrows() error: first end index not found");
 
                             if (firstBeginIndex != firstEndIndex) {
-                                this._addArrowsInputView(firstBeginIndex, firstEndIndex);
+                                this._drawArrowsInputView(cell, firstBeginIndex, firstEndIndex);
                             }
                         }
                     }
                 }
             }
-
-            this._drawArrowsInputView(cell)
         }
     }
 }
