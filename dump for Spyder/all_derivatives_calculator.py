@@ -194,16 +194,18 @@ def flaps_derivatives(aerodynamic_outputs, span_flap_start, span_flap_end, flap_
                         xyz_le=[np.tan(np.radians(wing_sweep))*span_flap_start, span_flap_start, 0],
                         chord=chord_flap_start,
                         twist=root_twist-(root_twist-tip_twist)*(span_flap_start/wing_span),
-                        airfoil=Airfoil(name="naca"+naca_series).add_control_surface(deflection=flap_deflection_angle, 
-                                                                 hinge_point_x=flap_hinge_position),
-                        control_surface_type='asymmetric'
+                        airfoil=Airfoil(name="naca"+naca_series),
+                        control_surface_type='asymmetric',
+                        control_surface_deflection=flap_deflection_angle,
+                        control_surface_hinge_point=flap_hinge_position
                     ),
                     WingXSec(  # Flaps end
                         xyz_le=[np.tan(np.radians(wing_sweep))*span_flap_end, span_flap_end, 0],
                         chord=chord_flap_end,
                         twist=root_twist-(root_twist-tip_twist)*(span_flap_end/wing_span),
-                        airfoil=Airfoil(name="naca"+naca_series).add_control_surface(deflection=flap_deflection_angle, 
-                                                                 hinge_point_x=flap_hinge_position),
+                        airfoil=Airfoil(name="naca"+naca_series),
+                        control_surface_deflection=flap_deflection_angle,
+                        control_surface_hinge_point=flap_hinge_position,
                         control_surface_type='asymmetric'
                     ),
                     WingXSec(  # Tip
@@ -333,14 +335,18 @@ def elevator_derivatives(aerodynamic_outputs, elevator_deflection_angle, elevato
                         xyz_le=[40, 0, 2],
                         chord=9,
                         twist=5,
-                        airfoil = Airfoil(name="naca0012").add_control_surface(deflection=elevator_deflection_angle, hinge_point_x=elevator_hinge_position),
+                        airfoil = Airfoil(name="naca0012"),
+                        control_surface_deflection=elevator_deflection_angle,
+                        control_surface_hinge_point=elevator_hinge_position,
                         control_surface_type='symmetric',  # Elevator
                     ),
                     WingXSec(  # tip
                         xyz_le=[44, 11, 2],
                         chord=5,
                         twist=5,
-                        airfoil= Airfoil(name="naca0012").add_control_surface(deflection=elevator_deflection_angle, hinge_point_x=elevator_hinge_position),
+                        airfoil= Airfoil(name="naca0012"),
+                        control_surface_deflection=elevator_deflection_angle,
+                        control_surface_hinge_point=elevator_hinge_position,
                         control_surface_type='symmetric',  # Elevator
                     )
                 ]
