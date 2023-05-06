@@ -108,10 +108,10 @@ class aero_IDO(om.ExplicitComponent):
         #in your IDO use the keyAero file
         
         # Run Aero IDO with different problem and setup names so as to not interfere with global MDO problem
-        get_ipython().run_line_magic('run', 'aero/aero_ido_vf8.py')
+        get_ipython().run_line_magic('run', 'aero_ido_vf8.py')
         
         # Reads Aero IDO output file 
-        with open("aero/aerodynamic_outputs.dat") as f:
+        with open("aerodynamic_outputs.dat") as f:
             aerodynamic_outputs = f.read()
         aerodynamic_outputs = ast.literal_eval(aerodynamic_outputs)
         

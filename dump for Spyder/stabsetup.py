@@ -533,16 +533,16 @@ class derivatives_calc(om.ExplicitComponent):
         
         cmq = 1
         
-        outputs['CM_alpha'] = Cma
-        outputs['Cmq'] = Cma
-        outputs['cmu'] = cmq
-        outputs['CLa'] = cmq
-        outputs['Cnb'] = cmq
-        outputs['Cnr'] = cmq
-        outputs['CYb'] = cmq
-        outputs['CTCD'] = cmq
-        outputs['Clb'] = cmq
-        outputs['Clp'] = cmq
+        #outputs['CM_alpha'] = Cma
+        #outputs['Cmq'] = Cma
+        #outputs['cmu'] = cmq
+        #outputs['CLa'] = cmq
+        #outputs['Cnb'] = cmq
+        #outputs['Cnr'] = cmq
+        #outputs['CYb'] = cmq
+        #outputs['CTCD'] = cmq
+        #outputs['Clb'] = cmq
+        #outputs['Clp'] = cmq
 
 
 # In[ ]:
