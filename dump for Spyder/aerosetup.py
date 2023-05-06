@@ -73,7 +73,7 @@ class aero_IDO(om.ExplicitComponent):
         self.add_input('m')
 
         self.add_output('taper')
-        self.add_output('b')
+        ##self.add_output('b')
         self.add_output('chord_tip')
         self.add_output('chord_root')
         self.add_output('sweep')
@@ -120,7 +120,7 @@ class aero_IDO(om.ExplicitComponent):
         #add outputs to connect to other disciplines
         outputs['chord_tip'] = aerodynamic_outputs["chord tip"]
         outputs['chord_root'] = aerodynamic_outputs["chord root"]
-        outputs["b"] = aerodynamic_outputs["span"]
+        ##outputs["b"] = aerodynamic_outputs["span"]
         outputs["sweep"] = aerodynamic_outputs["wing sweep"]
         outputs["wing_area"] = aerodynamic_outputs["S_ref"]
         outputs["aspect_ratio"] = aerodynamic_outputs["S_ref"]/aerodynamic_outputs["span"]

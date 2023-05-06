@@ -36,7 +36,7 @@ class struct(om.Group):
         i=0
         
         
-        WingData = pd.read_excel('struct/WingData.xlsx')
+        WingData = pd.read_excel('WingData.xlsx')
         self.options.declare('WingData', WingData)
         
     def setup(self):
@@ -69,8 +69,8 @@ class bendingmoments(om.ExplicitComponent):
         self.options.declare('rho',prob.model.struct.options['rho'])
         self.options.declare('v',prob.model.struct.options['v'])
         
-        self.options.declare('upper_naca', pd.read_excel('struct/naca23012_upper_coordinates.xlsx'))
-        self.options.declare('lower_naca', pd.read_excel('struct/naca23012_lower_coordinates.xlsx'))
+        self.options.declare('upper_naca', pd.read_excel('naca23012_upper_coordinates.xlsx'))
+        self.options.declare('lower_naca', pd.read_excel('naca23012_lower_coordinates.xlsx'))
         
     def setup(self):
         #define inputs (variables to come from other disciplines) and default values
