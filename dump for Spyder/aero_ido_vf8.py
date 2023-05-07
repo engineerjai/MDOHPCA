@@ -19,7 +19,7 @@ from cruise_conditions_calculator import cruise_conditions_calculator
 # EXTERNAL INPUTS
 keyaeronumbers = pd.read_csv("keyAero.dat")
 naca_series = str(int(keyaeronumbers.iloc[1]))
-max_allowable_wing_span = keyaeronumbers.iloc[2]
+max_allowable_wing_span = float(keyaeronumbers.iloc[2])
 mass = keyaeronumbers.iloc[0]
 
 # Acquires flight conditions at cruise
@@ -56,6 +56,7 @@ mesh_dict_aero={
 }
 
 # Generates the mesh based on the settings defined above
+
 mesh_aero = generate_mesh(mesh_dict_aero)
 
 # Creates a dictionary with info and options about the wing
