@@ -216,7 +216,7 @@ class optimisation(om.ExplicitComponent):
         dv= len(data_modified)
         if dv==0:
             min_weight=3622
-            half_span=40
+            half_span=80    #actually full_span 
             root_chord=12.6
             tip_chord=8.4
             Ix=2420160
