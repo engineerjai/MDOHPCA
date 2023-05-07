@@ -166,7 +166,6 @@ class landing_gear_calcs(om.ExplicitComponent):
         #define inputs (variables to come from other disciplines) and default values
         self.add_input('m', val = 240000)
         self.add_output('landing_tension')
-        prob.model.add_constraint('landing_tension', upper = self.options['tension_max'])
         
     def compute(self,inputs,outputs):
         tension = (inputs['m']*self.options['a'])/(2*math.sin(45))
@@ -284,17 +283,20 @@ class structures_cog(om.ExplicitComponent):
         #define inputs (variables to come from other disciplines) and default values
         
         self.add_input('sweep', val = 0.015)
-        self.add_input('c', val=30)
+        #self.add_input('c', val=30)
         self.add_input('b', val=80)
-        self.add_input('s', val=200) #wing area
+        #self.add_input('S_ref', val=200) #wing area
         self.add_input('aspect_ratio', val = 12)
-        self.add_input('taper_ratio', val = 0.45)
+        self.add_input('taper', val = 0.45)
         self.add_input('length_fuselage', val = 30)
         self.add_input('root_x')
         
         #currently trying these outputs - unsure
         self.add_output('cog_structures', shape = (2))
         self.add_output('weight_structures')
+        
+    def setup_partials(self):
+        self.declare_partials('*', '*', method = 'fd')
         
     def compute(self,inputs,outputs):
         
@@ -319,10 +321,10 @@ class structures_cog(om.ExplicitComponent):
         thic_chord_rat = self.options['thic_chord_rat']
         
         length_fuselage=inputs['length_fuselage']
-        s = inputs['s']
+        s = 200 #inputs['s']
         b = inputs['b']
-        c = inputs['c']
-        taper_ratio = inputs['taper_ratio']
+        c = 4 #inputs['c']
+        taper_ratio = inputs['taper']
         aspect_ratio = inputs['aspect_ratio']
         
         sweep = inputs['sweep']
@@ -426,11 +428,14 @@ class structures_cog(om.ExplicitComponent):
         
 
        # weight_structures = weight_wingxy[0] + weight_tailhxy[0] + weight_tailvxy[0]
+        #fuselage shell mass 
+        fuselage_mass = inputs['length_fuselage']*200
         
-        weight_structures=weight_wing+weight_tailv
-        cg_total=[(cg_wing[0]+cgh[0]+cgv[0]),(cg_wing[1]+cgh[1]+cgv[1])]
+        weight_structures = weight_wing + weight_tailv + fuselage_mass
+        cg_total=[(cg_wing[0]+cgh[0]+cgv[0]+0.5*inputs['length_fuselage']*fuselage_mass),(cg_wing[1]+cgh[1]+cgv[1])]
         cog_structures=[(cg_total[0]/weight_structures),(cg_total[1]/weight_structures)]
         
+
         outputs['cog_structures'] = cog_structures
         outputs['weight_structures'] = weight_structures
         

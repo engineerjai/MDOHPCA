@@ -71,14 +71,19 @@ class aero_IDO(om.ExplicitComponent):
         
     def setup(self):
         self.add_input('m')
-
+        self.add_input('c')
+        
         self.add_output('taper')
         ##self.add_output('b')
         self.add_output('chord_tip')
         self.add_output('chord_root')
         self.add_output('sweep')
-        self.add_output('wing_area')
+        self.add_output('S_ref')
         self.add_output('aspect_ratio')
+        self.add_output('twist_root')
+        self.add_output('twist_tip')
+
+
         
         self.add_output('CD')
         self.add_output('CL')
@@ -122,11 +127,13 @@ class aero_IDO(om.ExplicitComponent):
         discrete_outputs['aerodynamic_outputs'] = aerodynamic_outputs
         
         #add outputs to connect to other disciplines
+        outputs['twist_root'] = aerodynamic_outputs["twist root"]
+        outputs['twist_tip'] = aerodynamic_outputs["twist tip"]
         outputs['chord_tip'] = aerodynamic_outputs["chord tip"]
         outputs['chord_root'] = aerodynamic_outputs["chord root"]
         ##outputs["b"] = aerodynamic_outputs["span"]
         outputs["sweep"] = aerodynamic_outputs["wing sweep"]
-        outputs["wing_area"] = aerodynamic_outputs["S_ref"]
+        outputs['S_ref'] = aerodynamic_outputs["S_ref"]
         outputs["aspect_ratio"] = aerodynamic_outputs["span"]**2/aerodynamic_outputs["S_ref"]
         outputs["taper"] = aerodynamic_outputs["taper"]
         outputs["CD"] = round(aerodynamic_outputs["CD"],4)

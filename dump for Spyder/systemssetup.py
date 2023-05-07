@@ -75,10 +75,12 @@ class fuel_mass_calc(om.ExplicitComponent):
         #define inputs (variables to come from other disciplines) and default values
         self.add_input('CD', val = 0.02)
         self.add_input('CL', val = 0.6)
+        self.add_input('S_ref')
+
         self.add_input('m')
         
-        self.add_output('fuel_mass')        
-        prob.model.add_constraint('fuel_mass', lower = 20000)
+        self.add_output('fuel_mass')
+        
     def setup_partials(self):
         self.declare_partials('*', '*', method = 'fd')
     
@@ -88,7 +90,7 @@ class fuel_mass_calc(om.ExplicitComponent):
         R = self.options['R']*1000
         SFC = self.options['SFC']
         v = self.options['v']
-        S = self.options['S']
+        S = inputs['S_ref']
         rho = self.options['rho']
         
         W0 = inputs['m']
@@ -131,9 +133,6 @@ class tanks(om.ExplicitComponent):
         #define inputs (variables to come from other disciplines) and default values
         self.add_input('fuel_mass', val = 30000)
         self.add_input('total_CG', shape = (1,2))
-
-        self.add_input('tank_ratio') #ratio of tank diameter to fuselage diameter
-        prob.model.add_constraint('tank_ratio',lower = 0.3, upper = 1)
         
         self.add_output('tank1_mass_full')
         self.add_output('tank1_mass_empty')
@@ -161,7 +160,7 @@ class tanks(om.ExplicitComponent):
         LH2_T = self.options['LH2_T']
         
         f_mass = inputs['fuel_mass']
-        R = inputs['tank_ratio']*self.options['fuselage_diameter']/2 #outer radius of tank
+        R = self.options['fuselage_diameter']/2 #outer radius of tank
         
         
         f_vol = f_mass*(1.072/LH2_rho) #calculate fuel volume, uses allowance factor from book
@@ -381,10 +380,10 @@ class engine(om.ExplicitComponent):
     def initialize(self):
         self.options.declare('T_W',prob.model.sys.options['T_W'])
         self.options.declare('T_m',prob.model.sys.options['T_m'])
-    
+        self.options.declare('fuselage_diameter',prob.model.sys.options['fuselage_diameter'])
     def setup(self):
-        self.add_input('fuselage_diameter', val = 8)
-        self.add_input('wingspan', val = 80)
+
+        self.add_input('b', val = 80)
         self.add_input('sweep', val = 30) #sweep angle (degrees)
         self.add_input('root_x', val = 15) #x-coord of root of wing
         self.add_input('m')
@@ -392,6 +391,9 @@ class engine(om.ExplicitComponent):
         self.add_output('engine_mass')
         self.add_output('engine_x')
         self.add_output('engine_y')
+        
+    def setup_partials(self):
+        self.declare_partials('*', '*', method = 'fd')      
         
     def compute(self,inputs,outputs):
         #engine size based off the original constraint diagram calculation
@@ -402,7 +404,7 @@ class engine(om.ExplicitComponent):
         
         #decide on engine position, will be an implicit function with the pipes calculation in previous cell as well as the bending moment from structures
         #ensure to add bounds so the engines are not too far or too close
-        engine_y = ((inputs['wingspan']/2)-(inputs['fuselage_diameter']/2))/2 #estimate of halfway between fuselage and wing tip, will need to work with structures to make implicit function
+        engine_y = ((inputs['b']/2)-(self.options['fuselage_diameter']/2))/2 #estimate of halfway between fuselage and wing tip, will need to work with structures to make implicit function
         outputs['engine_y'] = engine_y
         sweep_r = inputs['sweep']*np.pi/180  #sweep in radians
         outputs['engine_x'] = engine_y*np.tan(sweep_r)+inputs['root_x']
@@ -436,6 +438,9 @@ class actuator(om.ExplicitComponent):
         self.add_output('each_flap_actuator_mass') #will be passed to structures and systems roundup
         self.add_output('each_aileron_actuator_mass')
         self.add_output('actuators_CG_x')
+        
+    def setup_partials(self):
+        self.declare_partials('*', '*', method = 'fd')
         
     def compute(self,inputs,outputs):
         moment_F = (inputs['flap_req']/inputs['flap_n'])*(inputs['flap_L']/2)   #torque required assuming the force on flap acts halfway along the flap
@@ -526,14 +531,11 @@ class systems_roundup(om.ExplicitComponent):
         APU_mass = 150
         APU_x = inputs['length_fuselage']-5
         
-        #fuselage shell mass 
-        fuselage_mass = inputs['length_fuselage']*200
-        
         #totals
         ##product of masses and x-positions
         sys_CG_comp = (actuators_mass*actuator_CG_x) + (engines_mass*engine_CG_x) + (tanks_mass*full_tanks_CG_x) + (pipes_mass*pipes_CG_x) + (vent_mass*vent_x) + (boost_pump_mass*boost_pump_CG_x) + (APU_mass*APU_x)
         ##total mass
-        sys_mass = actuators_mass + engines_mass + tanks_mass + pipes_mass + vent_mass + boost_pump_mass + APU_mass + fuselage_mass
+        sys_mass = actuators_mass + engines_mass + tanks_mass + pipes_mass + vent_mass + boost_pump_mass + APU_mass 
         
         outputs['systems_mass'] = sys_mass
         outputs['systems_CG'] = sys_CG_comp/sys_mass

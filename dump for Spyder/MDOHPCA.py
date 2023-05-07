@@ -1,6 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""
+Created on Sun May  7 17:18:17 2023
 
+@author: Jai
+"""
 # In[ ]:
 
 
@@ -36,7 +39,7 @@ class MDOHPCA(om.Group):
         self.add_subsystem('aero', aero())
         
         self.add_subsystem('mass', mass())
-        self.set_order(['aero','stab','struct','sys','mass']) #aero inputs necessary first before others
+        self.set_order(['mass','aero','stab','struct','sys']) #aero inputs necessary first before others
         
     def configure(self):
         #promote all variables (lazy option, they can be connected individually)
@@ -44,6 +47,7 @@ class MDOHPCA(om.Group):
         self.promotes('struct',any=['*'])
         self.promotes('aero',any=['*'])
         self.promotes('stab',any=['*'])
+        
         self.promotes('mass',any=['*'])
 
         
@@ -58,7 +62,7 @@ class mass(om.ExplicitComponent):
         self.add_input('systems_CG')
         
         self.add_output('m')
-        prob.model.add_objective('m')
+        
         
         self.add_output('total_CG', shape = (1,2))
         
@@ -68,7 +72,8 @@ class mass(om.ExplicitComponent):
     def compute(self,inputs,outputs):
         #calculation of mass from systems and structures
         mass = inputs['systems_mass'] + inputs['weight_structures']
-        
+        if mass < 10000:
+            mass = 50000 #initialize
         outputs['m'] = mass
         
         #calculation of CG from systems and structures
@@ -107,7 +112,7 @@ with open('structsetup.py', 'r') as st:
 # In[ ]:
 
 
-prob = om.Problem(model = MDOHPCA())
+prob = om.Problem(model = MDOHPCA(), reports = True)
 #prob.model.add_subsystem('aero', om.Group())
 
 
@@ -119,33 +124,51 @@ prob.model.set_input_defaults('CL', val = 0.6)
 prob.model.set_input_defaults('CD', val = 0.02)
 
 prob.model.set_input_defaults('sweep', val = 15)
+prob.model.set_input_defaults('taper', val = 0.4)
+
 prob.model.set_input_defaults('c', val = 4)
 prob.model.set_input_defaults('b', val = 60)
 prob.model.set_input_defaults('root_x', val = 10)
 prob.model.set_input_defaults('m', val = 240000)
-prob.model.set_input_defaults('CD', val = 0.02)
 
-
-prob.model.add_design_var('tank_ratio', lower = 0.3, upper = 1)
-prob.model.set_input_defaults('tank_ratio', val = 1)
 
 # In[ ]:
+#constraints
+prob.model.add_constraint('fuel_mass', lower = 5000, upper = 100000, linear = False)
+prob.model.add_constraint('landing_tension', upper = 90000000)
 
+prob.model.add_constraint('Cmq', upper = 0)
+prob.model.add_constraint('CM_alpha', upper = 0)
+prob.model.add_constraint('cmu', lower = 0)
+prob.model.add_constraint('CLa', lower = 0)
+prob.model.add_constraint('Cnb', lower = 0)
+prob.model.add_constraint('Cnr', upper = 0)
+prob.model.add_constraint('CYb', upper = 0)
+prob.model.add_constraint('CTCD', upper = 0.01)
+prob.model.add_constraint('Clb', upper = 0)
+prob.model.add_constraint('Clp', upper = 0)
 
-#declare problem options (driver, optimiser)
+prob.model.add_objective('m', scaler = 1e-4)
+
+# In[ ]:
+#declare problem options (of driver and optimiser)
 
 #prob.nonlinear_solver = om.NonlinearBlockGS()
 #prob.nonlinear_solver = om.NewtonSolver(solve_subsystems=False)
 prob.model.nonlinear_solver = om.NonlinearBlockGS()
 prob.model.nonlinear_solver.options['iprint'] = 2
-prob.model.nonlinear_solver.options['maxiter'] = 50
+prob.model.nonlinear_solver.options['rtol'] = 1e-5
+prob.model.nonlinear_solver.options['maxiter'] = 30
+prob.model.nonlinear_solver.options['use_aitken'] = True
+prob.model.nonlinear_solver.options['restart_from_successful'] = True
 
-#prob.nonlinear_solver.options['maxiter'] = 100
 
 prob.driver = om.ScipyOptimizeDriver()
 prob.driver.options['optimizer'] = 'SLSQP'
 prob.driver.options['tol'] = 1e-5
+prob.driver.options['disp'] = True
 
+#prob.driver.options["debug_print"] = ["nl_cons", "objs", "desvars"]
 #setup problem to be run
 prob.setup()
 
@@ -176,32 +199,6 @@ prob.model.list_inputs()
 # In[ ]:
 
 
-mass = 6
-naca_series = '23014'
-max_allowable_wing_span = 90
-keyaeronumbers = pd.DataFrame(list([mass,naca_series,max_allowable_wing_span]))
-keyaeronumbers
-
-
-# In[ ]:
-
-
-keyaeronumbers = pd.read_csv("keyAero.dat")
-
-
-# In[ ]:
-
-
-f = pd.DataFrame(keyaeronumbers)
-
-
-# In[ ]:
-
-
-str(int(f.iloc[1]))
-
-
-# In[ ]:
 
 
 

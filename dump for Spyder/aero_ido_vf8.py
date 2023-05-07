@@ -18,7 +18,7 @@ from cruise_conditions_calculator import cruise_conditions_calculator
 
 # EXTERNAL INPUTS
 keyaeronumbers = pd.read_csv("keyAero.dat")
-naca_series = str(int(keyaeronumbers.iloc[1]))
+naca_series = '23012'
 max_allowable_wing_span = float(keyaeronumbers.iloc[2])
 mass = float(keyaeronumbers.iloc[0])
 
@@ -27,8 +27,8 @@ cruise_speed, Re_cruise, cruise_air_density, a_cruise, T_cruise, eta_cruise = cr
 
 # Calculates basic wing characteristics based on the preliminary wing design approach
 aver_chord_0 = prelim_wing_design.avg_chord(mass, max_allowable_wing_span)     # [m]
-wing_area_target = prelim_wing_design.S_Ref(mass, max_allowable_wing_span)     # [m^2]
-cl_cruise_target = prelim_wing_design.CL_cruise(mass, max_allowable_wing_span) # []
+wing_area_target = float(prelim_wing_design.S_Ref(mass, max_allowable_wing_span))     # [m^2]
+cl_cruise_target = float(prelim_wing_design.CL_cruise(mass, max_allowable_wing_span)) # []
 
 # Generates unit-aerofoil coordinates
 x_aerofoil, y_aerofoil =  naca_calc.naca_five_digit_aerofoil_coordinates_calculator(naca_series)
@@ -88,7 +88,7 @@ surface = {
 }
 
 # Creates the OpenMDAO problem
-prob_aero = om.Problem()
+prob_aero = om.Problem(reports = False)
 indep_var_comp = om.IndepVarComp()
 indep_var_comp.add_output("v", val=-cruise_speed, units="m/s")                  # Cruise speed relative to outside air
 indep_var_comp.add_output ("alpha", val=0, units="deg")                         # Assumed stead-state angle of attack
@@ -119,22 +119,30 @@ prob_aero.model.connect(surface["name"] + ".mesh", point_name + ".aero_states." 
 
 # Imports the Scipy Optimizer and set the driver of the problem to use it, which defaults to an SLSQP optimisation method
 prob_aero.driver = om.ScipyOptimizeDriver()
-prob_aero.driver.options["tol"] = 1e-9
-prob_aero.driver.options["debug_print"] = ["nl_cons", "objs", "desvars"]
+prob_aero.driver.options["tol"] = 1e-8
+prob_aero.driver.options["disp"] = False
+
+#prob_aero.driver.options["debug_print"] = ["desvars"]
 
 # Sets up and adds the design variables, the constraints and the objective
 prob_aero.model.add_design_var(point_name + ".wing_perf.t_over_c", lower=0, upper=2) # although not exactly a design variable, oas doesn't work without this
 prob_aero.model.add_design_var("wing.twist_cp", lower=0, upper=15) 
 prob_aero.model.add_design_var("wing.chord_cp", lower=6.5, upper=15, indices=[-1])
 
+
 # The objective is: MinDrag While Area and CL_cruise requirements are met
-prob_aero.model.add_constraint(point_name + ".wing.S_ref", equals=wing_area_target)
-prob_aero.model.add_constraint(point_name + ".wing_perf.CL", equals=cl_cruise_target)
+prob_aero.model.add_constraint(point_name + ".wing.S_ref", lower = wing_area_target, upper = 2*wing_area_target)
+prob_aero.model.add_constraint(point_name + ".wing_perf.CL", lower = 0.8*cl_cruise_target, upper = 3*cl_cruise_target)
 prob_aero.model.add_objective(point_name + ".wing_perf.CD", scaler=1e4)
 
 # Sets up and runs the optimisation problem
+
 prob_aero.setup()
 prob_aero.run_driver()
+
+CL = prob_aero[point_name + ".wing_perf.CL.CL"][0]
+if CL < 0.01:
+    CL = 0.01
 
 aerodynamic_outputs = {
     "alpha": prob_aero["alpha"][0],
@@ -146,7 +154,7 @@ aerodynamic_outputs = {
     "t over c tip": prob_aero["wing.t_over_c_cp"][0],
     "t over c root": prob_aero["wing.t_over_c_cp"][1],
     "CD": prob_aero[point_name + ".wing_perf.CD"][0],  
-    "CL": prob_aero[point_name + ".wing_perf.CL"][0],
+    "CL": CL, 
     "CM": prob_aero[point_name + ".total_perf.CM"][1],
     "span":max_allowable_wing_span,
     "taper": prob_aero["wing.taper"][0],
