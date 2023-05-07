@@ -331,6 +331,9 @@ class derivatives_calc(om.ExplicitComponent):
         self.add_output('Cmq')
         #prob.model.add_constraint('Cmq', upper = 0)
         
+        self.add_output('CM_alpha')
+        #prob.model.add_constraint('Cmq', upper = 0)
+        
         self.add_output('cmu')
         #prob.model.add_constraint('cmu', lower = 0)
         
@@ -431,6 +434,9 @@ class derivatives_calc(om.ExplicitComponent):
         S=inputs['S_ref']
         
         Cmq=derivatives['Cmq'];
+        CL_alpha = derivatives["CL_alpha_dot"] #, CD_alpha, CM_alpha
+        CM_alpha = derivatives["CM_alpha_dot"]
+
         
         xac=aver_chord*0.25;
         #xcg-xnp=cmalpha/clalpha
@@ -533,16 +539,16 @@ class derivatives_calc(om.ExplicitComponent):
         
         cmq = 1
         
-        #outputs['CM_alpha'] = Cma
-        #outputs['Cmq'] = Cma
-        #outputs['cmu'] = cmq
-        #outputs['CLa'] = cmq
-        #outputs['Cnb'] = cmq
-        #outputs['Cnr'] = cmq
-        #outputs['CYb'] = cmq
-        #outputs['CTCD'] = cmq
-        #outputs['Clb'] = cmq
-        #outputs['Clp'] = cmq
+        outputs['CM_alpha'] = CM_alpha
+        outputs['Cmq'] = Cmq
+        outputs['cmu'] = cmu
+        outputs['CLa'] = CL_alpha
+        outputs['Cnb'] = derivatives['Cnb']
+        outputs['Cnr'] = derivatives['Clr']
+        outputs['CYb'] = derivatives['CYb']
+        outputs['CTCD'] = CTxu-CDu
+        outputs['Clb'] = derivatives['Clb']
+        outputs['Clp'] = derivatives['Clp']
 
 
 # In[ ]:

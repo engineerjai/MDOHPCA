@@ -80,6 +80,9 @@ class aero_IDO(om.ExplicitComponent):
         self.add_output('wing_area')
         self.add_output('aspect_ratio')
         
+        self.add_output('CD')
+        self.add_output('CL')
+        
         self.add_discrete_output('aerodynamic_outputs', val = {"alpha": 0.0, 
                                                              "chord tip": 8.400740631102945, 
                                                              "chord root": 12.630388118952684, 
@@ -124,8 +127,9 @@ class aero_IDO(om.ExplicitComponent):
         outputs["sweep"] = aerodynamic_outputs["wing sweep"]
         outputs["wing_area"] = aerodynamic_outputs["S_ref"]
         outputs["aspect_ratio"] = aerodynamic_outputs["S_ref"]/aerodynamic_outputs["span"]
-        outputs["taper"] = 0.45
-
+        outputs["taper"] = aerodynamic_outputs["taper"]
+        outputs["CD"] = round(aerodynamic_outputs["CD"],4)
+        outputs["CL"] = round(aerodynamic_outputs["CL"],4)
 
 # In[ ]:
 

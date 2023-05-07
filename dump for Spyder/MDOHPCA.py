@@ -36,6 +36,7 @@ class MDOHPCA(om.Group):
         self.add_subsystem('aero', aero())
         
         self.add_subsystem('mass', mass())
+        self.set_order(['aero','stab','struct','sys','mass']) #aero inputs necessary first before others
         
     def configure(self):
         #promote all variables (lazy option, they can be connected individually)
@@ -45,7 +46,7 @@ class MDOHPCA(om.Group):
         self.promotes('stab',any=['*'])
         self.promotes('mass',any=['*'])
 
-
+        
 # In[ ]:
 
 
@@ -93,11 +94,12 @@ with open('systemssetup.py', 'r') as sy:
     exec(sy.read())
 with open('aerosetup.py', 'r') as ae:
     exec(ae.read())
-with open('stabsetup.py', 'r') as sta:
-    exec(sta.read())
+#with open('stabsetup.py', 'r') as sta:
+#    exec(sta.read())
 with open('structsetup.py', 'r') as st:
     exec(st.read())
-
+class stab(om.Group):
+    pass
  #get_ipython().run_line_magic('run', 'struct/structsetup.py')
 #get_ipython().run_line_magic('run', 'stab/stabsetup.py')
 #get_ipython().run_line_magic('run', 'systems/systemssetup.py')
@@ -115,16 +117,18 @@ prob = om.Problem(model = MDOHPCA())
 
 #setting inputs to reduce ambiguities where inputs differ in different disciplines
 prob.model.set_input_defaults('CL', val = 0.6)
+prob.model.set_input_defaults('CD', val = 0.02)
+
 prob.model.set_input_defaults('sweep', val = 15)
 prob.model.set_input_defaults('c', val = 4)
 prob.model.set_input_defaults('b', val = 60)
 prob.model.set_input_defaults('root_x', val = 10)
 prob.model.set_input_defaults('m', val = 240000)
+prob.model.set_input_defaults('CD', val = 0.02)
 
 
 prob.model.add_design_var('tank_ratio', lower = 0.3, upper = 1)
 prob.model.set_input_defaults('tank_ratio', val = 1)
-
 
 # In[ ]:
 
@@ -135,7 +139,7 @@ prob.model.set_input_defaults('tank_ratio', val = 1)
 #prob.nonlinear_solver = om.NewtonSolver(solve_subsystems=False)
 prob.model.nonlinear_solver = om.NonlinearBlockGS()
 prob.model.nonlinear_solver.options['iprint'] = 2
-prob.model.nonlinear_solver.options['maxiter'] = 200
+prob.model.nonlinear_solver.options['maxiter'] = 50
 
 #prob.nonlinear_solver.options['maxiter'] = 100
 
@@ -159,17 +163,6 @@ prob.run_model()
 #prob.run_driver()
 
 
-# In[ ]:
-
-
-prob.model.get_design_vars()
-
-
-# In[ ]:
-
-
-prob.model.get_val('tank_ratio')
-
 
 # In[ ]:
 
@@ -178,6 +171,7 @@ prob.model.get_val('tank_ratio')
 #prob.model.sys.options._dict['pp_mass']
 
 prob.model.list_outputs()
+prob.model.list_inputs()
 
 
 # In[ ]:

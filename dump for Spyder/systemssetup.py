@@ -487,7 +487,7 @@ class systems_roundup(om.ExplicitComponent):
         self.add_input('tank2_x', val = 40) 
         
         
-        self.add_input('fuselage_length', val = 80) 
+        self.add_input('length_fuselage', val = 80) 
         
         
         self.add_output('systems_mass') 
@@ -516,7 +516,7 @@ class systems_roundup(om.ExplicitComponent):
         #additional systems
         ## Vent boil off system is placed at the back 
         vent_mass = 60
-        vent_x = inputs['fuselage_length']-2
+        vent_x = inputs['length_fuselage']-2
         
         ## Boost pumps are placed at the engines
         boost_pump_mass = 6*28.8  #multistage centrifugal pump for great efficiency and immersion in LH2, with an electric motor driving it, 3 per tank
@@ -524,10 +524,10 @@ class systems_roundup(om.ExplicitComponent):
         
         #APU also at the back
         APU_mass = 150
-        APU_x = inputs['fuselage_length']-5
+        APU_x = inputs['length_fuselage']-5
         
         #fuselage shell mass 
-        fuselage_mass = inputs['fuselage_length']*200
+        fuselage_mass = inputs['length_fuselage']*200
         
         #totals
         ##product of masses and x-positions
