@@ -94,12 +94,11 @@ with open('systemssetup.py', 'r') as sy:
     exec(sy.read())
 with open('aerosetup.py', 'r') as ae:
     exec(ae.read())
-#with open('stabsetup.py', 'r') as sta:
-#    exec(sta.read())
+with open('stabsetup.py', 'r') as sta:
+    exec(sta.read())
 with open('structsetup.py', 'r') as st:
     exec(st.read())
-class stab(om.Group):
-    pass
+
  #get_ipython().run_line_magic('run', 'struct/structsetup.py')
 #get_ipython().run_line_magic('run', 'stab/stabsetup.py')
 #get_ipython().run_line_magic('run', 'systems/systemssetup.py')
