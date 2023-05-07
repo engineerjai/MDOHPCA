@@ -111,8 +111,9 @@ class aero_IDO(om.ExplicitComponent):
         #in your IDO use the keyAero file
         
         # Run Aero IDO with different problem and setup names so as to not interfere with global MDO problem
-        get_ipython().run_line_magic('run', 'aero_ido_vf8.py')
-        
+        #get_ipython().run_line_magic('run', 'aero_ido_vf8.py')
+        with open('aero_ido_vf8.py', 'r') as sy:
+            exec(sy.read())
         # Reads Aero IDO output file 
         with open("aerodynamic_outputs.dat") as f:
             aerodynamic_outputs = f.read()
@@ -126,7 +127,7 @@ class aero_IDO(om.ExplicitComponent):
         ##outputs["b"] = aerodynamic_outputs["span"]
         outputs["sweep"] = aerodynamic_outputs["wing sweep"]
         outputs["wing_area"] = aerodynamic_outputs["S_ref"]
-        outputs["aspect_ratio"] = aerodynamic_outputs["S_ref"]/aerodynamic_outputs["span"]
+        outputs["aspect_ratio"] = aerodynamic_outputs["span"]**2/aerodynamic_outputs["S_ref"]
         outputs["taper"] = aerodynamic_outputs["taper"]
         outputs["CD"] = round(aerodynamic_outputs["CD"],4)
         outputs["CL"] = round(aerodynamic_outputs["CL"],4)
