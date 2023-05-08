@@ -73,7 +73,7 @@ class mass(om.ExplicitComponent):
         #calculation of mass from systems and structures
         mass = inputs['systems_mass'] + inputs['weight_structures']
         if mass < 10000:
-            mass = 50000 #initialize
+            mass = 50000 #initialize + prevent divergence
         outputs['m'] = mass
         
         #calculation of CG from systems and structures
@@ -125,6 +125,7 @@ prob.model.set_input_defaults('CD', val = 0.02)
 
 prob.model.set_input_defaults('sweep', val = 15)
 prob.model.set_input_defaults('taper', val = 0.4)
+prob.model.set_input_defaults('total_CG', val = 10)
 
 prob.model.set_input_defaults('c', val = 4)
 prob.model.set_input_defaults('b', val = 60)
@@ -157,7 +158,7 @@ prob.model.add_objective('m', scaler = 1e-4)
 #prob.nonlinear_solver = om.NewtonSolver(solve_subsystems=False)
 prob.model.nonlinear_solver = om.NonlinearBlockGS()
 prob.model.nonlinear_solver.options['iprint'] = 2
-prob.model.nonlinear_solver.options['rtol'] = 1e-5
+prob.model.nonlinear_solver.options['rtol'] = 1e-10
 prob.model.nonlinear_solver.options['maxiter'] = 30
 prob.model.nonlinear_solver.options['use_aitken'] = True
 prob.model.nonlinear_solver.options['restart_from_successful'] = True
@@ -171,8 +172,13 @@ prob.driver.options['disp'] = True
 #prob.driver.options["debug_print"] = ["nl_cons", "objs", "desvars"]
 #setup problem to be run
 prob.setup()
+prob.final_setup()
 
 
+#write XDSM model
+#from omxdsm import write_xdsm
+#write_xdsm(prob, filename='MDOHPCA_trial', out_format='tex', show_browser=True,
+#           quiet=False, output_side='left',include_solver=True)#
 # In[ ]:
 
 
@@ -197,6 +203,7 @@ prob.model.list_inputs()
 
 
 # In[ ]:
+
 
 
 

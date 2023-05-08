@@ -132,7 +132,7 @@ prob_aero.model.add_design_var("wing.chord_cp", lower=6.5, upper=15, indices=[-1
 
 # The objective is: MinDrag While Area and CL_cruise requirements are met
 prob_aero.model.add_constraint(point_name + ".wing.S_ref", lower = wing_area_target, upper = 2*wing_area_target)
-prob_aero.model.add_constraint(point_name + ".wing_perf.CL", lower = 0.8*cl_cruise_target, upper = 3*cl_cruise_target)
+prob_aero.model.add_constraint(point_name + ".wing_perf.CL", lower = cl_cruise_target, upper = 3*cl_cruise_target)
 prob_aero.model.add_objective(point_name + ".wing_perf.CD", scaler=1e4)
 
 # Sets up and runs the optimisation problem

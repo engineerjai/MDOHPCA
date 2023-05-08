@@ -1,0 +1,666 @@
+
+%%% Preamble Requirements %%%
+% \usepackage{geometry}
+% \usepackage{amsfonts}
+% \usepackage{amsmath}
+% \usepackage{amssymb}
+% \usepackage{tikz}
+
+% Optional packages such as sfmath set through python interface
+% \usepackage{sfmath}
+
+% \usetikzlibrary{arrows,chains,positioning,scopes,shapes.geometric,shapes.misc,shadows}
+
+%%% End Preamble Requirements %%%
+
+\input{"C:/Users/Jai/anaconda3/envs/MDOHPCA/lib/site-packages/pyxdsm/diagram_styles"}
+\begin{tikzpicture}
+
+\matrix[MatrixSetup]{
+%Row 0
+&
+\node [Optimization] (ScipyOptimizeDriver) {$\text{\text{0, 20 $ \rightarrow $ 1: ScipyOptimizeDriver}}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\\
+%Row 1
+&
+&
+\node [Function] (@auto@ivc) {$\begin{array}{c}\text{1: \_auto\_ivc} \\ \text{\textit{IndepVarComp}}\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\\
+%Row 2
+&
+&
+&
+\node [MDA] (root@solver) {$\text{\text{2, 18 $ \rightarrow $ 3: NL: NLBGS}}$};&
+&
+\node [DataInter] (root@solver-mass) {$\begin{array}{c}systems\_CG^{t} \\ systems\_mass^{t}\end{array}$};&
+\node [DataInter] (root@solver-aero@aero@IDO) {$\begin{array}{c}m^{t}\end{array}$};&
+\node [DataInter] (root@solver-stab@derivatives@calc) {$\begin{array}{c}Ix^{t} \\ Ixz^{t} \\ Iy^{t} \\ Iz^{t} \\ b^{t}\end{array}$};&
+\node [DataInter] (root@solver-struct@bendingmoments) {$\begin{array}{c}b^{t}\end{array}$};&
+\node [DataInter] (root@solver-struct@landing@gear@calcs) {$\begin{array}{c}m^{t}\end{array}$};&
+\node [DataInter] (root@solver-struct@spars) {$\begin{array}{c}b^{t}\end{array}$};&
+&
+\node [DataInter] (root@solver-struct@structures@cog) {$\begin{array}{c}length\_fuselage^{t}\end{array}$};&
+\node [DataInter] (root@solver-sys@fuel@mass@calc) {$\begin{array}{c}m^{t}\end{array}$};&
+\node [DataInter] (root@solver-sys@tanks) {$\begin{array}{c}fuel\_mass^{t}\end{array}$};&
+\node [DataInter] (root@solver-sys@pipes) {$\begin{array}{c}tank1\_x^{t} \\ tank2\_x^{t}\end{array}$};&
+\node [DataInter] (root@solver-sys@engine) {$\begin{array}{c}b^{t}\end{array}$};&
+\node [DataInter] (root@solver-sys@actuator) {$\begin{array}{c}sweep^{t}\end{array}$};&
+\node [DataInter] (root@solver-sys@systems@roundup) {$\begin{array}{c}CGtp^{t} \\ length\_fuselage^{t} \\ tank1\_mass\_full^{t} \\ tank1\_x^{t} \\ tank2\_mass\_full^{t} \\ tank2\_x^{t}\end{array}$};\\
+%Row 3
+&
+&
+&
+\node [DataInter] (@auto@ivc-root@solver) {$\begin{array}{c}root\_x\end{array}$};&
+\node [Function] (@auto@ivc) {$\begin{array}{c}\text{3: \_auto\_ivc} \\ \text{\textit{\_AutoIndepVarComp}}\end{array}$};&
+&
+\node [DataInter] (@auto@ivc-aero@aero@IDO) {$\begin{array}{c}c\end{array}$};&
+\node [DataInter] (@auto@ivc-stab@derivatives@calc) {$\begin{array}{c}Cma \\ CL\_DE \\ CD\_DE \\ CM0 \\ CM\_DE\end{array}$};&
+\node [DataInter] (@auto@ivc-struct@bendingmoments) {$\begin{array}{c}c\end{array}$};&
+&
+\node [DataInter] (@auto@ivc-struct@spars) {$\begin{array}{c}c\end{array}$};&
+&
+\node [DataInter] (@auto@ivc-struct@structures@cog) {$\begin{array}{c}root\_x\end{array}$};&
+&
+&
+&
+\node [DataInter] (@auto@ivc-sys@engine) {$\begin{array}{c}root\_x\end{array}$};&
+\node [DataInter] (@auto@ivc-sys@actuator) {$\begin{array}{c}flap\_L \\ aileron\_pos\_y \\ aileron\_req \\ aileron\_n \\ aileron\_L \\ wing\_t \\ root\_x \\ flap\_pos\_y \\ flap\_req \\ flap\_n\end{array}$};&
+\node [DataInter] (@auto@ivc-sys@systems@roundup) {$\begin{array}{c}aileron\_n \\ flap\_n\end{array}$};\\
+%Row 4
+\node [DataIO] (left_output_mass) {$\begin{array}{c}m^{*}\end{array}$};&
+\node [DataInter] (mass-ScipyOptimizeDriver) {$\begin{array}{c}m\end{array}$};&
+&
+\node [DataInter] (mass-root@solver) {$\begin{array}{c}total\_CG\end{array}$};&
+&
+\node [Function] (mass) {$\begin{array}{c}\text{4: mass} \\ \text{\textit{mass}}\end{array}$};&
+\node [DataInter] (mass-aero@aero@IDO) {$\begin{array}{c}m\end{array}$};&
+\node [DataInter] (mass-stab@derivatives@calc) {$\begin{array}{c}m\end{array}$};&
+&
+\node [DataInter] (mass-struct@landing@gear@calcs) {$\begin{array}{c}m\end{array}$};&
+&
+&
+&
+\node [DataInter] (mass-sys@fuel@mass@calc) {$\begin{array}{c}m\end{array}$};&
+\node [DataInter] (mass-sys@tanks) {$\begin{array}{c}total\_CG\end{array}$};&
+&
+\node [DataInter] (mass-sys@engine) {$\begin{array}{c}m\end{array}$};&
+&
+\\
+%Row 5
+&
+&
+&
+\node [DataInter] (aero@aero@IDO-root@solver) {$\begin{array}{c}sweep\end{array}$};&
+&
+&
+\node [Function] (aero@aero@IDO) {$\begin{array}{c}\text{5: aero\_IDO} \\ \text{\textit{aero\_IDO}}\end{array}$};&
+\node [DataInter] (aero@aero@IDO-stab@derivatives@calc) {$\begin{array}{c}S\_ref \\ aerodynamic\_outputs \\ chord\_root \\ chord\_tip \\ sweep \\ taper \\ twist\_root \\ twist\_tip\end{array}$};&
+\node [DataInter] (aero@aero@IDO-struct@bendingmoments) {$\begin{array}{c}CL\end{array}$};&
+&
+\node [DataInter] (aero@aero@IDO-struct@spars) {$\begin{array}{c}sweep \\ taper\end{array}$};&
+&
+\node [DataInter] (aero@aero@IDO-struct@structures@cog) {$\begin{array}{c}aspect\_ratio \\ sweep \\ taper\end{array}$};&
+\node [DataInter] (aero@aero@IDO-sys@fuel@mass@calc) {$\begin{array}{c}CD \\ CL \\ S\_ref\end{array}$};&
+&
+&
+\node [DataInter] (aero@aero@IDO-sys@engine) {$\begin{array}{c}sweep\end{array}$};&
+\node [DataInter] (aero@aero@IDO-sys@actuator) {$\begin{array}{c}sweep\end{array}$};&
+\\
+%Row 6
+\node [DataIO] (left_output_stab@derivatives@calc) {$\begin{array}{c}Cmq^{*} \\ CM\_alpha^{*} \\ cmu^{*} \\ CLa^{*} \\ Cnb^{*} \\ Cnr^{*} \\ CYb^{*} \\ CTCD^{*} \\ Clb^{*} \\ Clp^{*}\end{array}$};&
+\node [DataInter] (stab@derivatives@calc-ScipyOptimizeDriver) {$\begin{array}{c}Cmq \\ CM\_alpha \\ cmu \\ CLa \\ Cnb \\ Cnr \\ CYb \\ CTCD \\ Clb \\ Clp\end{array}$};&
+&
+&
+&
+&
+&
+\node [Function] (stab@derivatives@calc) {$\begin{array}{c}\text{6: derivatives\_calc} \\ \text{\textit{derivatives\_calc}}\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\\
+%Row 7
+&
+&
+&
+&
+&
+&
+&
+&
+\node [Function] (struct@bendingmoments) {$\begin{array}{c}\text{7: bendingmoments} \\ \text{\textit{bendingmoments}}\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\\
+%Row 8
+\node [DataIO] (left_output_struct@landing@gear@calcs) {$\begin{array}{c}landing\_tension^{*}\end{array}$};&
+\node [DataInter] (struct@landing@gear@calcs-ScipyOptimizeDriver) {$\begin{array}{c}landing\_tension\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+\node [Function] (struct@landing@gear@calcs) {$\begin{array}{c}\text{8: landing\_gear\_calcs} \\ \text{\textit{landing\_gear\_calcs}}\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+\\
+%Row 9
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\node [Function] (struct@spars) {$\begin{array}{c}\text{9: spars} \\ \text{\textit{spars}}\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+\\
+%Row 10
+&
+&
+&
+\node [DataInter] (struct@optimisation-root@solver) {$\begin{array}{c}b\end{array}$};&
+&
+&
+&
+\node [DataInter] (struct@optimisation-stab@derivatives@calc) {$\begin{array}{c}Ix \\ Ixz \\ Iy \\ Iz \\ b\end{array}$};&
+\node [DataInter] (struct@optimisation-struct@bendingmoments) {$\begin{array}{c}b\end{array}$};&
+&
+\node [DataInter] (struct@optimisation-struct@spars) {$\begin{array}{c}b\end{array}$};&
+\node [Function] (struct@optimisation) {$\begin{array}{c}\text{10: optimisation} \\ \text{\textit{optimisation}}\end{array}$};&
+\node [DataInter] (struct@optimisation-struct@structures@cog) {$\begin{array}{c}b\end{array}$};&
+&
+&
+&
+\node [DataInter] (struct@optimisation-sys@engine) {$\begin{array}{c}b\end{array}$};&
+&
+\\
+%Row 11
+&
+&
+&
+\node [DataInter] (struct@structures@cog-root@solver) {$\begin{array}{c}cog\_structures \\ weight\_structures\end{array}$};&
+&
+\node [DataInter] (struct@structures@cog-mass) {$\begin{array}{c}cog\_structures \\ weight\_structures\end{array}$};&
+&
+&
+&
+&
+&
+&
+\node [Function] (struct@structures@cog) {$\begin{array}{c}\text{11: structures\_cog} \\ \text{\textit{structures\_cog}}\end{array}$};&
+&
+&
+&
+&
+&
+\\
+%Row 12
+\node [DataIO] (left_output_sys@fuel@mass@calc) {$\begin{array}{c}fuel\_mass^{*}\end{array}$};&
+\node [DataInter] (sys@fuel@mass@calc-ScipyOptimizeDriver) {$\begin{array}{c}fuel\_mass\end{array}$};&
+&
+\node [DataInter] (sys@fuel@mass@calc-root@solver) {$\begin{array}{c}fuel\_mass\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\node [Function] (sys@fuel@mass@calc) {$\begin{array}{c}\text{12: fuel\_mass\_calc} \\ \text{\textit{fuel\_mass\_calc}}\end{array}$};&
+\node [DataInter] (sys@fuel@mass@calc-sys@tanks) {$\begin{array}{c}fuel\_mass\end{array}$};&
+&
+&
+&
+\\
+%Row 13
+&
+&
+&
+\node [DataInter] (sys@tanks-root@solver) {$\begin{array}{c}tank1\_x \\ tank2\_x\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+\node [DataInter] (sys@tanks-struct@structures@cog) {$\begin{array}{c}length\_fuselage\end{array}$};&
+&
+\node [Function] (sys@tanks) {$\begin{array}{c}\text{13: tanks} \\ \text{\textit{tanks}}\end{array}$};&
+\node [DataInter] (sys@tanks-sys@pipes) {$\begin{array}{c}tank1\_x \\ tank2\_x\end{array}$};&
+&
+&
+\node [DataInter] (sys@tanks-sys@systems@roundup) {$\begin{array}{c}CGtp \\ length\_fuselage \\ tank1\_mass\_full \\ tank1\_x \\ tank2\_mass\_full \\ tank2\_x\end{array}$};\\
+%Row 14
+&
+&
+&
+\node [DataInter] (sys@pipes-root@solver) {$\begin{array}{c}pipe\_CG \\ pipe\_mass\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\node [Function] (sys@pipes) {$\begin{array}{c}\text{14: pipes} \\ \text{\textit{pipes}}\end{array}$};&
+&
+&
+\node [DataInter] (sys@pipes-sys@systems@roundup) {$\begin{array}{c}pipe\_CG \\ pipe\_mass\end{array}$};\\
+%Row 15
+&
+&
+&
+\node [DataInter] (sys@engine-root@solver) {$\begin{array}{c}engine\_x \\ engine\_y\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\node [DataInter] (sys@engine-sys@pipes) {$\begin{array}{c}engine\_x \\ engine\_y\end{array}$};&
+\node [Function] (sys@engine) {$\begin{array}{c}\text{15: engine} \\ \text{\textit{engine}}\end{array}$};&
+&
+\node [DataInter] (sys@engine-sys@systems@roundup) {$\begin{array}{c}engine\_mass \\ engine\_x\end{array}$};\\
+%Row 16
+&
+&
+&
+\node [DataInter] (sys@actuator-root@solver) {$\begin{array}{c}actuators\_CG\_x \\ each\_aileron\_actuator\_mass \\ each\_flap\_actuator\_mass\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\node [Function] (sys@actuator) {$\begin{array}{c}\text{16: actuator} \\ \text{\textit{actuator}}\end{array}$};&
+\node [DataInter] (sys@actuator-sys@systems@roundup) {$\begin{array}{c}actuators\_CG\_x \\ each\_aileron\_actuator\_mass \\ each\_flap\_actuator\_mass\end{array}$};\\
+%Row 17
+&
+&
+&
+\node [DataInter] (sys@systems@roundup-root@solver) {$\begin{array}{c}systems\_CG \\ systems\_mass\end{array}$};&
+&
+\node [DataInter] (sys@systems@roundup-mass) {$\begin{array}{c}systems\_CG \\ systems\_mass\end{array}$};&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\node [Function] (sys@systems@roundup) {$\begin{array}{c}\text{17: systems\_roundup} \\ \text{\textit{systems\_roundup}}\end{array}$};\\
+%Row 18
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+&
+\\
+};
+
+% XDSM process chains
+{ [start chain=process]
+ \begin{pgfonlayer}{process} 
+\chainin (ScipyOptimizeDriver);
+\chainin (@auto@ivc) [join=by ProcessHV];
+\chainin (root@solver) [join=by ProcessHV];
+\chainin (ScipyOptimizeDriver) [join=by ProcessHV];
+\end{pgfonlayer}
+}{ [start chain=process]
+ \begin{pgfonlayer}{process} 
+\chainin (root@solver);
+\chainin (@auto@ivc) [join=by ProcessHV];
+\chainin (mass) [join=by ProcessHV];
+\chainin (aero@aero@IDO) [join=by ProcessHV];
+\chainin (stab@derivatives@calc) [join=by ProcessHV];
+\chainin (struct@bendingmoments) [join=by ProcessHV];
+\chainin (struct@landing@gear@calcs) [join=by ProcessHV];
+\chainin (struct@spars) [join=by ProcessHV];
+\chainin (struct@optimisation) [join=by ProcessHV];
+\chainin (struct@structures@cog) [join=by ProcessHV];
+\chainin (sys@fuel@mass@calc) [join=by ProcessHV];
+\chainin (sys@tanks) [join=by ProcessHV];
+\chainin (sys@pipes) [join=by ProcessHV];
+\chainin (sys@engine) [join=by ProcessHV];
+\chainin (sys@actuator) [join=by ProcessHV];
+\chainin (sys@systems@roundup) [join=by ProcessHV];
+\chainin (root@solver) [join=by ProcessHV];
+\end{pgfonlayer}
+}
+
+\begin{pgfonlayer}{data}
+\path
+% Horizontal edges
+(sys@fuel@mass@calc) edge [DataLine] (sys@fuel@mass@calc-ScipyOptimizeDriver)
+(struct@landing@gear@calcs) edge [DataLine] (struct@landing@gear@calcs-ScipyOptimizeDriver)
+(stab@derivatives@calc) edge [DataLine] (stab@derivatives@calc-ScipyOptimizeDriver)
+(mass) edge [DataLine] (mass-ScipyOptimizeDriver)
+(@auto@ivc) edge [DataLine] (@auto@ivc-aero@aero@IDO)
+(@auto@ivc) edge [DataLine] (@auto@ivc-struct@bendingmoments)
+(@auto@ivc) edge [DataLine] (@auto@ivc-struct@spars)
+(@auto@ivc) edge [DataLine] (@auto@ivc-stab@derivatives@calc)
+(@auto@ivc) edge [DataLine] (@auto@ivc-sys@actuator)
+(@auto@ivc) edge [DataLine] (@auto@ivc-sys@systems@roundup)
+(@auto@ivc) edge [DataLine] (@auto@ivc-struct@structures@cog)
+(@auto@ivc) edge [DataLine] (@auto@ivc-sys@engine)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-sys@fuel@mass@calc)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-struct@bendingmoments)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-stab@derivatives@calc)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-struct@structures@cog)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-struct@spars)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-sys@actuator)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-sys@engine)
+(mass) edge [DataLine] (mass-aero@aero@IDO)
+(mass) edge [DataLine] (mass-stab@derivatives@calc)
+(mass) edge [DataLine] (mass-struct@landing@gear@calcs)
+(mass) edge [DataLine] (mass-sys@engine)
+(mass) edge [DataLine] (mass-sys@fuel@mass@calc)
+(mass) edge [DataLine] (mass-sys@tanks)
+(struct@optimisation) edge [DataLine] (struct@optimisation-stab@derivatives@calc)
+(struct@optimisation) edge [DataLine] (struct@optimisation-struct@bendingmoments)
+(struct@optimisation) edge [DataLine] (struct@optimisation-struct@spars)
+(struct@optimisation) edge [DataLine] (struct@optimisation-struct@structures@cog)
+(struct@optimisation) edge [DataLine] (struct@optimisation-sys@engine)
+(struct@structures@cog) edge [DataLine] (struct@structures@cog-mass)
+(sys@actuator) edge [DataLine] (sys@actuator-sys@systems@roundup)
+(sys@engine) edge [DataLine] (sys@engine-sys@systems@roundup)
+(sys@engine) edge [DataLine] (sys@engine-sys@pipes)
+(sys@fuel@mass@calc) edge [DataLine] (sys@fuel@mass@calc-sys@tanks)
+(sys@pipes) edge [DataLine] (sys@pipes-sys@systems@roundup)
+(sys@systems@roundup) edge [DataLine] (sys@systems@roundup-mass)
+(sys@tanks) edge [DataLine] (sys@tanks-sys@systems@roundup)
+(sys@tanks) edge [DataLine] (sys@tanks-struct@structures@cog)
+(sys@tanks) edge [DataLine] (sys@tanks-sys@pipes)
+(root@solver) edge [DataLine] (root@solver-aero@aero@IDO)
+(@auto@ivc) edge [DataLine] (@auto@ivc-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@bendingmoments)
+(@auto@ivc) edge [DataLine] (@auto@ivc-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@spars)
+(@auto@ivc) edge [DataLine] (@auto@ivc-root@solver)
+(root@solver) edge [DataLine] (root@solver-stab@derivatives@calc)
+(@auto@ivc) edge [DataLine] (@auto@ivc-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@actuator)
+(@auto@ivc) edge [DataLine] (@auto@ivc-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@systems@roundup)
+(@auto@ivc) edge [DataLine] (@auto@ivc-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@structures@cog)
+(@auto@ivc) edge [DataLine] (@auto@ivc-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@engine)
+(@auto@ivc) edge [DataLine] (@auto@ivc-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@fuel@mass@calc)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@bendingmoments)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-root@solver)
+(root@solver) edge [DataLine] (root@solver-stab@derivatives@calc)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@structures@cog)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@spars)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@actuator)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@engine)
+(aero@aero@IDO) edge [DataLine] (aero@aero@IDO-root@solver)
+(root@solver) edge [DataLine] (root@solver-aero@aero@IDO)
+(mass) edge [DataLine] (mass-root@solver)
+(root@solver) edge [DataLine] (root@solver-stab@derivatives@calc)
+(mass) edge [DataLine] (mass-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@landing@gear@calcs)
+(mass) edge [DataLine] (mass-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@engine)
+(mass) edge [DataLine] (mass-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@fuel@mass@calc)
+(mass) edge [DataLine] (mass-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@tanks)
+(mass) edge [DataLine] (mass-root@solver)
+(root@solver) edge [DataLine] (root@solver-stab@derivatives@calc)
+(struct@optimisation) edge [DataLine] (struct@optimisation-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@bendingmoments)
+(struct@optimisation) edge [DataLine] (struct@optimisation-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@spars)
+(struct@optimisation) edge [DataLine] (struct@optimisation-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@structures@cog)
+(struct@optimisation) edge [DataLine] (struct@optimisation-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@engine)
+(struct@optimisation) edge [DataLine] (struct@optimisation-root@solver)
+(root@solver) edge [DataLine] (root@solver-mass)
+(struct@structures@cog) edge [DataLine] (struct@structures@cog-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@systems@roundup)
+(sys@actuator) edge [DataLine] (sys@actuator-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@systems@roundup)
+(sys@engine) edge [DataLine] (sys@engine-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@pipes)
+(sys@engine) edge [DataLine] (sys@engine-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@tanks)
+(sys@fuel@mass@calc) edge [DataLine] (sys@fuel@mass@calc-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@systems@roundup)
+(sys@pipes) edge [DataLine] (sys@pipes-root@solver)
+(root@solver) edge [DataLine] (root@solver-mass)
+(sys@systems@roundup) edge [DataLine] (sys@systems@roundup-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@systems@roundup)
+(sys@tanks) edge [DataLine] (sys@tanks-root@solver)
+(root@solver) edge [DataLine] (root@solver-struct@structures@cog)
+(sys@tanks) edge [DataLine] (sys@tanks-root@solver)
+(root@solver) edge [DataLine] (root@solver-sys@pipes)
+(sys@tanks) edge [DataLine] (sys@tanks-root@solver)
+(sys@fuel@mass@calc) edge [DataLine] (left_output_sys@fuel@mass@calc)
+(struct@landing@gear@calcs) edge [DataLine] (left_output_struct@landing@gear@calcs)
+(stab@derivatives@calc) edge [DataLine] (left_output_stab@derivatives@calc)
+(mass) edge [DataLine] (left_output_mass)
+% Vertical edges
+(sys@fuel@mass@calc-ScipyOptimizeDriver) edge [DataLine] (ScipyOptimizeDriver)
+(struct@landing@gear@calcs-ScipyOptimizeDriver) edge [DataLine] (ScipyOptimizeDriver)
+(stab@derivatives@calc-ScipyOptimizeDriver) edge [DataLine] (ScipyOptimizeDriver)
+(mass-ScipyOptimizeDriver) edge [DataLine] (ScipyOptimizeDriver)
+(@auto@ivc-aero@aero@IDO) edge [DataLine] (aero@aero@IDO)
+(@auto@ivc-struct@bendingmoments) edge [DataLine] (struct@bendingmoments)
+(@auto@ivc-struct@spars) edge [DataLine] (struct@spars)
+(@auto@ivc-stab@derivatives@calc) edge [DataLine] (stab@derivatives@calc)
+(@auto@ivc-sys@actuator) edge [DataLine] (sys@actuator)
+(@auto@ivc-sys@systems@roundup) edge [DataLine] (sys@systems@roundup)
+(@auto@ivc-struct@structures@cog) edge [DataLine] (struct@structures@cog)
+(@auto@ivc-sys@engine) edge [DataLine] (sys@engine)
+(aero@aero@IDO-sys@fuel@mass@calc) edge [DataLine] (sys@fuel@mass@calc)
+(aero@aero@IDO-struct@bendingmoments) edge [DataLine] (struct@bendingmoments)
+(aero@aero@IDO-stab@derivatives@calc) edge [DataLine] (stab@derivatives@calc)
+(aero@aero@IDO-struct@structures@cog) edge [DataLine] (struct@structures@cog)
+(aero@aero@IDO-struct@spars) edge [DataLine] (struct@spars)
+(aero@aero@IDO-sys@actuator) edge [DataLine] (sys@actuator)
+(aero@aero@IDO-sys@engine) edge [DataLine] (sys@engine)
+(mass-aero@aero@IDO) edge [DataLine] (aero@aero@IDO)
+(mass-stab@derivatives@calc) edge [DataLine] (stab@derivatives@calc)
+(mass-struct@landing@gear@calcs) edge [DataLine] (struct@landing@gear@calcs)
+(mass-sys@engine) edge [DataLine] (sys@engine)
+(mass-sys@fuel@mass@calc) edge [DataLine] (sys@fuel@mass@calc)
+(mass-sys@tanks) edge [DataLine] (sys@tanks)
+(struct@optimisation-stab@derivatives@calc) edge [DataLine] (stab@derivatives@calc)
+(struct@optimisation-struct@bendingmoments) edge [DataLine] (struct@bendingmoments)
+(struct@optimisation-struct@spars) edge [DataLine] (struct@spars)
+(struct@optimisation-struct@structures@cog) edge [DataLine] (struct@structures@cog)
+(struct@optimisation-sys@engine) edge [DataLine] (sys@engine)
+(struct@structures@cog-mass) edge [DataLine] (mass)
+(sys@actuator-sys@systems@roundup) edge [DataLine] (sys@systems@roundup)
+(sys@engine-sys@systems@roundup) edge [DataLine] (sys@systems@roundup)
+(sys@engine-sys@pipes) edge [DataLine] (sys@pipes)
+(sys@fuel@mass@calc-sys@tanks) edge [DataLine] (sys@tanks)
+(sys@pipes-sys@systems@roundup) edge [DataLine] (sys@systems@roundup)
+(sys@systems@roundup-mass) edge [DataLine] (mass)
+(sys@tanks-sys@systems@roundup) edge [DataLine] (sys@systems@roundup)
+(sys@tanks-struct@structures@cog) edge [DataLine] (struct@structures@cog)
+(sys@tanks-sys@pipes) edge [DataLine] (sys@pipes)
+(root@solver-aero@aero@IDO) edge [DataLine] (aero@aero@IDO)
+(@auto@ivc-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@bendingmoments) edge [DataLine] (struct@bendingmoments)
+(@auto@ivc-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@spars) edge [DataLine] (struct@spars)
+(@auto@ivc-root@solver) edge [DataLine] (root@solver)
+(root@solver-stab@derivatives@calc) edge [DataLine] (stab@derivatives@calc)
+(@auto@ivc-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@actuator) edge [DataLine] (sys@actuator)
+(@auto@ivc-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@systems@roundup) edge [DataLine] (sys@systems@roundup)
+(@auto@ivc-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@structures@cog) edge [DataLine] (struct@structures@cog)
+(@auto@ivc-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@engine) edge [DataLine] (sys@engine)
+(@auto@ivc-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@fuel@mass@calc) edge [DataLine] (sys@fuel@mass@calc)
+(aero@aero@IDO-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@bendingmoments) edge [DataLine] (struct@bendingmoments)
+(aero@aero@IDO-root@solver) edge [DataLine] (root@solver)
+(root@solver-stab@derivatives@calc) edge [DataLine] (stab@derivatives@calc)
+(aero@aero@IDO-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@structures@cog) edge [DataLine] (struct@structures@cog)
+(aero@aero@IDO-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@spars) edge [DataLine] (struct@spars)
+(aero@aero@IDO-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@actuator) edge [DataLine] (sys@actuator)
+(aero@aero@IDO-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@engine) edge [DataLine] (sys@engine)
+(aero@aero@IDO-root@solver) edge [DataLine] (root@solver)
+(root@solver-aero@aero@IDO) edge [DataLine] (aero@aero@IDO)
+(mass-root@solver) edge [DataLine] (root@solver)
+(root@solver-stab@derivatives@calc) edge [DataLine] (stab@derivatives@calc)
+(mass-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@landing@gear@calcs) edge [DataLine] (struct@landing@gear@calcs)
+(mass-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@engine) edge [DataLine] (sys@engine)
+(mass-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@fuel@mass@calc) edge [DataLine] (sys@fuel@mass@calc)
+(mass-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@tanks) edge [DataLine] (sys@tanks)
+(mass-root@solver) edge [DataLine] (root@solver)
+(root@solver-stab@derivatives@calc) edge [DataLine] (stab@derivatives@calc)
+(struct@optimisation-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@bendingmoments) edge [DataLine] (struct@bendingmoments)
+(struct@optimisation-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@spars) edge [DataLine] (struct@spars)
+(struct@optimisation-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@structures@cog) edge [DataLine] (struct@structures@cog)
+(struct@optimisation-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@engine) edge [DataLine] (sys@engine)
+(struct@optimisation-root@solver) edge [DataLine] (root@solver)
+(root@solver-mass) edge [DataLine] (mass)
+(struct@structures@cog-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@systems@roundup) edge [DataLine] (sys@systems@roundup)
+(sys@actuator-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@systems@roundup) edge [DataLine] (sys@systems@roundup)
+(sys@engine-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@pipes) edge [DataLine] (sys@pipes)
+(sys@engine-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@tanks) edge [DataLine] (sys@tanks)
+(sys@fuel@mass@calc-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@systems@roundup) edge [DataLine] (sys@systems@roundup)
+(sys@pipes-root@solver) edge [DataLine] (root@solver)
+(root@solver-mass) edge [DataLine] (mass)
+(sys@systems@roundup-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@systems@roundup) edge [DataLine] (sys@systems@roundup)
+(sys@tanks-root@solver) edge [DataLine] (root@solver)
+(root@solver-struct@structures@cog) edge [DataLine] (struct@structures@cog)
+(sys@tanks-root@solver) edge [DataLine] (root@solver)
+(root@solver-sys@pipes) edge [DataLine] (sys@pipes)
+(sys@tanks-root@solver) edge [DataLine] (root@solver);
+\end{pgfonlayer}
+
+\end{tikzpicture}
